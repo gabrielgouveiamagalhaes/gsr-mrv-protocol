@@ -2,7 +2,7 @@
 
 **An open protocol for auditable measurement of steel recovered in ship and port dismantling.**
 
-Current version: **0.2 — draft for comment** · [Read the spec →](SPEC.md)
+Current version: **0.3 — draft for comment** · [Read the spec →](SPEC.md)
 
 ---
 
@@ -42,8 +42,10 @@ This protocol specifies that capability, in a form a second party can implement.
 | 2 | **Scored** | Facilities running a compliance system. |
 | 3 | **Attested** | Level 2 plus independent third-party attestation. |
 
-The publisher operates at **Level 2**. Level 3 is currently unattained by anyone, including the
-publisher, because no conformity assessment scheme exists yet.
+The publisher operates at **Level 2** on its reference campaign, and files a **non-conformance**
+on its second one. Both declarations are published in
+[conformance/declarations/](conformance/declarations/). Level 3 is unattained by anyone, including
+the publisher, because no conformity assessment scheme exists yet.
 
 ## Why it is open
 

@@ -1,6 +1,6 @@
 # MRV-P Protocol
 
-**Version 0.2 — draft for comment**
+**Version 0.3 — draft for comment**
 An open protocol for auditable measurement of steel recovered in ship and port dismantling.
 
 Published by GSR Logística Reversa Naval. Free to implement, by anyone, including competitors.
@@ -269,7 +269,22 @@ software can begin.
 | **3** | Attested | Level 2, plus an append-only trail (10), per-campaign carbon factors (9), and independent third-party attestation of the campaign record. |
 
 The publisher currently operates at **Level 2**, with Level 3 unattained: no independent
-attestation of a campaign record has yet been obtained.
+attestation of a campaign record has yet been obtained. Its own declarations are published in
+[conformance/declarations/](conformance/declarations/) — one Level 2, and one non-conformance.
+
+### 11.1 Declaration scope
+
+A declaration SHALL name its scope. The scope MAY be a whole campaign, or a **named material
+stream** within a campaign.
+
+> **Requirement 11.2.** Where a stream-scoped declaration is made, the implementer SHALL also file
+> the campaign-scoped result, including a non-conformance, and SHALL NOT present a stream-scoped
+> level as though it applied to the campaign.
+
+Without stream scoping, an implementer holding one well-measured stream inside a poorly-measured
+campaign has no way to report the part that is sound, and the rational response is to report
+nothing. The publisher's own B1 declaration is exactly this case: non-conforming as a campaign,
+Level 1 for its ferrous stream.
 
 ## 12. Known limits of this version
 

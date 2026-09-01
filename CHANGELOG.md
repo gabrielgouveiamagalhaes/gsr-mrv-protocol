@@ -2,6 +2,29 @@
 
 All notable changes to the MRV-P Protocol are recorded here, with the rationale for each.
 
+## [0.3] — 2026-09-01
+
+Filing the publisher's own conformance declarations changed the specification. Again.
+
+### Added
+- **Clause 11.1 — declaration scope**, and **Requirement 11.2**: a declaration may be scoped to a
+  named material stream, provided the campaign-scoped result is also filed, including a
+  non-conformance.
+- The publisher's own declarations: [P2](conformance/declarations/P2.md) — Level 2, and
+  [B1](conformance/declarations/B1.md) — **non-conforming**, with its ferrous stream at Level 1.
+
+### Why
+Filling in the checklist for B1 produced a failure with no way to report it usefully. The campaign
+fails 2.1 because seven of eight material streams were sized against declared LDT rather than
+weighed. But one stream — 681.765 t of ferrous across 123 expeditions — fully satisfies Level 1.
+Without stream scoping, the honest options were to declare nothing or to overstate, and a protocol
+that leaves those as the only two choices will be ignored.
+
+### Note
+P2's declaration records an evidence distribution of E1 56.8 % / E2 43.2 %, and fails Level 3 on
+requirement 3.10 alone — no independent attestation — with the other nine met. It is declared at
+Level 2, because partial conformance is reported by declaring the lower level.
+
 ## [0.2] — 2026-09-01
 
 Testing the protocol against a second campaign changed the specification. That is the intended
