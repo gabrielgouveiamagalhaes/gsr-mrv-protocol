@@ -1,6 +1,6 @@
 # MRV-P Protocol
 
-**Version 0.1 — draft for comment**
+**Version 0.2 — draft for comment**
 An open protocol for auditable measurement of steel recovered in ship and port dismantling.
 
 Published by GSR Logística Reversa Naval. Free to implement, by anyone, including competitors.
@@ -189,6 +189,35 @@ A facility that cannot state its own estimating error cannot produce an auditabl
 balance. Publishing `k` is the cheapest available demonstration that an implementer is measuring
 rather than asserting.
 
+### 8.1 `k` and `r` are different quantities
+
+A structural take-off and a declared registry figure — lightweight displacement tonnage, a
+manufacturer's mass, a customs declaration — are not the same basis, and the ratios computed
+against them SHALL NOT be reported under the same symbol.
+
+```
+k = P_weighed / P_take-off        take-off = engineer's member-by-member sum
+r = P_recovered / P_declared      declared = registry or manufacturer figure
+```
+
+> **Requirement 8.2.** An implementer publishing a ratio SHALL state which of `k` or `r` it is,
+> and SHALL name the basis of the denominator. An implementer SHALL NOT compute `k` by
+> substituting a declared figure for a structural take-off.
+
+`r` and `k` answer different questions. `k` measures **how wrong the engineering was**. `r`
+measures **how much of a declared mass actually leaves the site as a given material**. A facility
+with an excellent `k` may have a low `r` simply because the registry figure counts machinery,
+outfitting and non-ferrous mass that was never in scope.
+
+| Campaign | Ratio | Value | Denominator basis |
+|----------|-------|-------|-------------------|
+| `P2` | `k` | **1.167** | Sealed structural take-off, 692.64 t |
+| `B1` | `r` | **0.708** | Declared LDT, 962.38 t (ferrous recovered 681.765 t) |
+
+These two numbers SHALL NOT be compared with each other. They are published together to make the
+distinction concrete. See [reference/b1-campaign.md](reference/b1-campaign.md) for why B1 cannot
+yield a `k`.
+
 ## 9. Carbon accounting
 
 > **Requirement 9.1.** An emission factor SHALL be established per campaign, and SHALL be
@@ -250,12 +279,18 @@ Read this before citing the protocol.
   judgement about what matters, and no study yet demonstrates that these particular coefficients
   outperform alternatives.
 - `δ = 0.15` is likewise a chosen tolerance.
-- The calibration factor `k = 1.167` comes from **one asset of one type**. It is a hypothesis,
-  not a model, until a second campaign of a different type tests it.
+- The calibration factor `k = 1.167` still comes from **one asset of one type**. Testing it
+  against a second campaign (B1, two passenger ferries) did not settle it: that campaign has no
+  structural take-off, only a declared LDT, and so yields `r`, not `k`. A second `k` remains the
+  single highest-value open contribution — see [CONTRIBUTING.md](CONTRIBUTING.md).
+- `r = 0.708` likewise rests on one campaign of one asset type.
 - No conformity assessment scheme exists. Nobody can currently certify a Level 3 claim,
   including the publisher.
-- The protocol has not been tested against an asset containing significant non-ferrous or
-  composite fractions.
+- The protocol has not been tested against an asset containing significant composite fractions.
+  B1 contained non-ferrous and organic streams, but only its ferrous stream was weighed per load;
+  the remainder is `E3`.
+- Clause 5's confidence tier has not yet been exercised against a campaign whose documents were
+  machine-extracted at scale.
 
 These limits are stated because a protocol that hides them is worth less than one that does not.
 Each is an invitation: an implementer who tests the weights against their own data, or who
@@ -263,9 +298,15 @@ supplies a second calibration factor, materially improves version 0.2.
 
 ## 13. Provenance
 
-The reference campaign is the dismantling of a ship-to-shore gantry crane at a Brazilian port
-terminal: 808.0 t recovered across 107 weighed loads against a 692.64 t structural take-off,
-under a cut plan sealed by a registered engineer. See [reference/p2-campaign.md](reference/p2-campaign.md).
+Two campaigns are published as references.
+
+**P2** — a ship-to-shore gantry crane at a Brazilian port terminal: 808.0 t recovered across 107
+weighed loads against a 692.64 t structural take-off, under a cut plan sealed by a registered
+engineer. See [reference/p2-campaign.md](reference/p2-campaign.md).
+
+**B1** — two historic passenger ferries, 2020: 681.765 t of ferrous steel weighed across 123
+expeditions against a declared LDT of 962.38 t. Added in v0.2 to test clause 8, which it did not
+confirm; it produced clause 8.1 instead. See [reference/b1-campaign.md](reference/b1-campaign.md).
 
 The method is documented in three papers co-authored with Prof. Fernanda Baião at PUC-Rio — two
 presented at the II Symposium on Decommissioning (CONIDS, UFRJ) on the data-science framework and

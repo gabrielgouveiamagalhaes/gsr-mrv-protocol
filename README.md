@@ -2,7 +2,7 @@
 
 **An open protocol for auditable measurement of steel recovered in ship and port dismantling.**
 
-Current version: **0.1 — draft for comment** · [Read the spec →](SPEC.md)
+Current version: **0.2 — draft for comment** · [Read the spec →](SPEC.md)
 
 ---
 
@@ -29,7 +29,8 @@ This protocol specifies that capability, in a form a second party can implement.
    whether the evidence agrees with itself.
 4. **Reconcile against official weight** — divergence beyond `δ = 0.15` goes to review and SHALL
    NOT be closed by adjusting the estimate.
-5. **Publish your own estimating error** — the ratio of weighed mass to engineering take-off.
+5. **Publish your own estimating error** — the ratio of weighed mass to engineering take-off
+   (`k`), kept strictly distinct from the recovery ratio against a declared registry figure (`r`).
 6. **Establish carbon factors per campaign, with their denominator** — this is where most
    overstatement actually comes from.
 
@@ -55,7 +56,9 @@ competitors of the publisher. A standard is worth more to its author adopted tha
 The most useful contributions are adversarial. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 - A **second calibration factor** from a different asset type is the single highest-value
-  contribution to v0.2 — it is what turns `k = 1.167` from a hypothesis into a model.
+  contribution — it is what turns `k = 1.167` from a hypothesis into a model. The publisher tried
+  to supply one from its own second campaign and could not; see
+  [reference/b1-campaign.md](reference/b1-campaign.md).
 - Evidence that the clause 4 or clause 6 weights are wrong.
 - An argument that `δ = 0.15` is the wrong tolerance.
 - A conformance report from your own implementation.
@@ -63,9 +66,9 @@ The most useful contributions are adversarial. See [CONTRIBUTING.md](CONTRIBUTIN
 ## Known limits
 
 The weights are expert-assigned, not empirically derived. `δ` is a chosen tolerance. The
-calibration factor comes from one asset of one type. No conformity assessment scheme exists.
-The protocol is untested against assets with significant non-ferrous or composite fractions.
-See [clause 12](SPEC.md#12-known-limits-of-this-version).
+calibration factor `k` still comes from one asset of one type, and the second campaign could not
+supply another. No conformity assessment scheme exists, so nobody can certify a Level 3 claim —
+including the publisher. See [clause 12](SPEC.md#12-known-limits-of-this-version).
 
 ## Licence
 
