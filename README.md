@@ -71,6 +71,17 @@ each individual material stream when the campaign as a whole does not conform.
 
 It exits non-zero on non-conformance, so it can sit in a build.
 
+## Regenerate the PDFs
+
+The Markdown files are canonical. The paginated PDFs are generated from them, so there is no second
+copy to drift:
+
+```bash
+python3 tools/render.py SPEC.md       build/SPEC_EN.html
+python3 tools/render.py SPEC.pt-BR.md build/SPEC_PT.html
+# then print each to PDF with a headless browser at A4
+```
+
 ## How to contribute
 
 The most useful contributions are adversarial. See [CONTRIBUTING.md](CONTRIBUTING.md).
