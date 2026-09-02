@@ -2,7 +2,7 @@
 
 **An open protocol for auditable measurement of steel recovered in ship and port dismantling.**
 
-Current version: **0.3 — draft for comment** · [Read the spec →](SPEC.md)
+Current version: **0.3 — draft for comment** · [Read the spec →](SPEC.md) · [Versão em português →](SPEC.pt-BR.md)
 
 ---
 

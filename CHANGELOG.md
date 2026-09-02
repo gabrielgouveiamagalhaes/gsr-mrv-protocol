@@ -20,6 +20,13 @@ weighed. But one stream — 681.765 t of ferrous across 123 expeditions — full
 Without stream scoping, the honest options were to declare nothing or to overstate, and a protocol
 that leaves those as the only two choices will be ignored.
 
+### Translated
+- [`SPEC.pt-BR.md`](SPEC.pt-BR.md) — normative Portuguese version, using the ABNT/ISO modal
+  convention (DEVE / NÃO DEVE / CONVÉM QUE / PODE) rather than a literal rendering of
+  SHALL/SHOULD/MAY. Brazil is where the yards, the mills and the regulator are; a protocol that
+  reaches an implementer only in English cannot be filed by most of the parties able to file it.
+  The English version prevails on divergence until one is designated canonical.
+
 ### Tooling
 - [`tools/check.py`](tools/check.py) — dependency-free reference checker. Reads a campaign record,
   reports every clause, computes `k` or `r` and names which, applies the divergence rule, and
