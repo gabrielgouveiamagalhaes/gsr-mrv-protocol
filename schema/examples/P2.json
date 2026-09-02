@@ -1,0 +1,52 @@
+{
+  "protocol_version": "0.3",
+  "campaign": {
+    "id": "P2",
+    "label": "Ship-to-shore gantry crane, port terminal",
+    "asset_type": "portainer",
+    "period": "2021-07",
+    "facility": "GSR 999 · Gradim, Sao Goncalo / RJ"
+  },
+  "streams": [
+    {
+      "material": "steel_ferrous",
+      "mass_t": 808.0,
+      "measurement": "per_load",
+      "loads": 107,
+      "weighbridge_certified": true,
+      "evidence": { "E1": 458.7, "E2": 349.3, "E3": 0.0 }
+    }
+  ],
+  "takeoff": {
+    "basis": "structural",
+    "mass_t": 692.64,
+    "sealed_by_registered_engineer": true
+  },
+  "reconciliation": {
+    "delta": 0.15,
+    "checks": []
+  },
+  "scoring": {
+    "lot_scores_computed": true,
+    "computed_not_entered": true,
+    "confidence_tiers": true,
+    "gating_enforced": true,
+    "quality_gate": true,
+    "divergences_retained": true,
+    "no_estimate_revision": true
+  },
+  "carbon": {
+    "factor_tco2e_per_t": 1.8,
+    "denominator": "net lot weight, all materials",
+    "methodology": "gs_vm0041",
+    "uncertainty_pct": 10,
+    "imported_from_other_campaign": false,
+    "modelled_defaults_labelled": true
+  },
+  "audit": {
+    "append_only": true,
+    "single_source_of_truth": true,
+    "inconsistency_blocks_certification": true
+  },
+  "attestation": { "independent_third_party": false }
+}

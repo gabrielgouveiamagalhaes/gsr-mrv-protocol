@@ -20,6 +20,19 @@ weighed. But one stream — 681.765 t of ferrous across 123 expeditions — full
 Without stream scoping, the honest options were to declare nothing or to overstate, and a protocol
 that leaves those as the only two choices will be ignored.
 
+### Tooling
+- [`tools/check.py`](tools/check.py) — dependency-free reference checker. Reads a campaign record,
+  reports every clause, computes `k` or `r` and names which, applies the divergence rule, and
+  determines campaign-scope and stream-scope levels. Exits non-zero on non-conformance.
+- [`tools/test_check.py`](tools/test_check.py) — asserts that the checker independently reproduces
+  both filed declarations (P2 → Level 2, B1 → non-conforming with its ferrous stream at Level 1),
+  and that a loosened `δ` and an imported carbon factor are both caught.
+- Machine-readable records for both campaigns in [`schema/examples/`](schema/examples/).
+
+The checker was written after the declarations, and reproduced them without adjustment. It also
+detected the LDT-closure pattern in B1 on its own: unmeasured streams of 280 t against a declared
+figure less measured mass of 280.62 t.
+
 ### Note
 P2's declaration records an evidence distribution of E1 56.8 % / E2 43.2 %, and fails Level 3 on
 requirement 3.10 alone — no independent attestation — with the other nine met. It is declared at

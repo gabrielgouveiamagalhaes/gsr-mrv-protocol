@@ -53,6 +53,24 @@ A measurement method that only its author can run is not a measurement method; i
 claim. This protocol is free to implement, cite and adapt with attribution — including by
 competitors of the publisher. A standard is worth more to its author adopted than owned.
 
+## Check your own record
+
+The reference checker is standard-library Python with no dependencies, on purpose: a conformance
+checker that needs an install is one more reason not to run it.
+
+```bash
+python3 tools/check.py schema/examples/P2.json   # -> Level 2 Scored
+python3 tools/check.py schema/examples/B1.json   # -> NON-CONFORMING (exit 1)
+python3 tools/test_check.py                      # asserts both against the filed declarations
+```
+
+Describe your campaign in the shape of [schema/examples/P2.json](schema/examples/P2.json) and run
+it. The checker reports every clause, computes `k` or `r` and says which it is, applies the
+divergence rule, and determines the level — including, under clause 11.1, the level available to
+each individual material stream when the campaign as a whole does not conform.
+
+It exits non-zero on non-conformance, so it can sit in a build.
+
 ## How to contribute
 
 The most useful contributions are adversarial. See [CONTRIBUTING.md](CONTRIBUTING.md).

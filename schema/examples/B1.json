@@ -1,0 +1,61 @@
+{
+  "protocol_version": "0.3",
+  "campaign": {
+    "id": "B1",
+    "label": "Vital Brazil & Itapuca, passenger ferries",
+    "asset_type": "monocoque_steel_hull",
+    "period": "2020-02/2020-10",
+    "facility": "GSR 999 · Gradim, Sao Goncalo / RJ"
+  },
+  "streams": [
+    {
+      "material": "steel_ferrous",
+      "mass_t": 681.765,
+      "measurement": "per_load",
+      "loads": 123,
+      "weighbridge_certified": true,
+      "evidence": { "E1": 0.0, "E2": 681.765, "E3": 0.0 }
+    },
+    { "material": "equipment",        "mass_t": 50.0,  "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 50.0 } },
+    { "material": "wire_copper",      "mass_t": 10.0,  "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 10.0 } },
+    { "material": "electric_motors",  "mass_t": 5.0,   "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 5.0 } },
+    { "material": "bronze",           "mass_t": 5.0,   "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 5.0 } },
+    { "material": "valves",           "mass_t": 10.0,  "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 10.0 } },
+    { "material": "wood",             "mass_t": 120.0, "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 120.0 } },
+    { "material": "residue",          "mass_t": 80.0,  "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 80.0 } }
+  ],
+  "declared": {
+    "basis": "ldt",
+    "mass_t": 962.38,
+    "source": "Tribunal Maritimo registration"
+  },
+  "reconciliation": {
+    "delta": 0.15,
+    "checks": [
+      { "label": "steel declared vs sum of line items", "expected_t": 681.765, "observed_t": 724.695 }
+    ]
+  },
+  "scoring": {
+    "lot_scores_computed": false,
+    "computed_not_entered": false,
+    "confidence_tiers": false,
+    "gating_enforced": false,
+    "quality_gate": false,
+    "divergences_retained": true,
+    "no_estimate_revision": true
+  },
+  "carbon": {
+    "factor_tco2e_per_t": 1.5,
+    "denominator": "recovered ferrous only",
+    "methodology": "gs_vm0041",
+    "uncertainty_pct": 10,
+    "imported_from_other_campaign": false,
+    "modelled_defaults_labelled": true
+  },
+  "audit": {
+    "append_only": false,
+    "single_source_of_truth": true,
+    "inconsistency_blocks_certification": false
+  },
+  "attestation": { "independent_third_party": false }
+}
