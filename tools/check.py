@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reference conformance checker for the MRV-P Protocol.
+"""Reference conformance checker for the MRV-P Protocol (v0.4).
 
 Reads a campaign record (JSON) and reports, clause by clause, which requirements
 are met and which conformance level the record supports — at campaign scope and,
@@ -121,11 +121,24 @@ def evaluate(rec):
         exp, obs = c["expected_t"], c["observed_t"]
         e_rel = abs(obs - exp) / max(exp, 0.1)
         flag = e_rel > (delta or 0.15)
-        divergences.append((c.get("label", "?"), e_rel, flag))
-    for label, e_rel, flag in divergences:
+        divergences.append((c.get("label", "?"), e_rel, flag,
+                            c.get("cause"), bool(c.get("unexplained"))))
+    for label, e_rel, flag, cause, unexplained in divergences:
         r.check("7.1", f"Reconciliation: {label}", not flag,
                 f"e_rel = {e_rel:+.4f} -> " + ("DIVERGENCE, conformance review" if flag
                                                else "within tolerance, recorded"))
+        # Requisito 7.2 (v0.4). delta decide quando uma diferenca vira DIVERGENCIA
+        # sujeita a revisao; nunca decidiu quando ela merece EXPLICACAO. O B1 do
+        # proprio publicador passou a clausula 7 sobre +6,30% que era erro de
+        # intervalo de planilha, com causa exata e descobrivel.
+        if cause:
+            r.check("7.2", f"Difference explained: {label}", True, cause[:96])
+        elif unexplained:
+            r.check("7.2", f"Difference marked unexplained: {label}", True,
+                    "explicitly unexplained — permitted, and visible")
+        else:
+            r.check("7.2", f"Difference explained or marked unexplained: {label}", False,
+                    "neither a cause nor an explicit unexplained marker — non-conforming under 7.2")
     sc = rec.get("scoring") or {}
     r.check("7.1b", "Divergences retained and no estimate revised to match weight",
             bool(sc.get("divergences_retained")) and bool(sc.get("no_estimate_revision")))
@@ -159,7 +172,7 @@ def evaluate(rec):
 
     # ---- clause 11 — level -------------------------------------------------
     L1 = {"2.1", "2.1b", "3", "8.2"}
-    L2 = L1 | {"4", "4b", "5", "5.1", "6.1", "7", "7.1", "7.1b", "7b"}
+    L2 = L1 | {"4", "4b", "5", "5.1", "6.1", "7", "7.1", "7.1b", "7.2", "7b"}
     L3 = L2 | {"9", "9.1", "9.1b", "10", "10b", "10c"}
 
     level = 0

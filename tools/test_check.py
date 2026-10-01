@@ -52,7 +52,7 @@ def test_b1():
     r, level, (kind, val, _), measured, unmeasured = evaluate(rec)
     expect("campaign level", level, 0)
     expect("ratio kind", kind, "r")
-    expect("r value (3dp)", round(val, 3), 0.708)
+    expect("r value (3dp)", round(val, 3), 0.753)
     expect("2.1 fails", "2.1" in r.failed, True)
     expect("2.1b closure detected", "2.1b" in r.failed, True)
     expect("unmeasured stream count", len(unmeasured), 7)
@@ -69,6 +69,32 @@ def test_delta_guard():
     expect("level drops below 2", level < 2, True)
 
 
+def test_unexplained_difference_guard():
+    print("\nGuard — requirement 7.2: a difference with no cause is non-conforming")
+    # Era exatamente este o estado do B1 em v0.3: +6,30% dentro de delta, com
+    # PASS na clausula 7, e nenhuma clausula pedindo a causa. Era erro de
+    # intervalo de planilha, com resposta exata.
+    rec = load("B1")
+    assert rec["reconciliation"]["checks"][0].get("cause"), "B1 deve trazer a causa"
+    del rec["reconciliation"]["checks"][0]["cause"]
+    r, level, _, _, _ = evaluate(rec)
+    expect("7.2 fails with no cause", "7.2" in r.failed, True)
+
+    print("  — and an explicit 'unexplained' marker is permitted")
+    rec["reconciliation"]["checks"][0]["unexplained"] = True
+    r, _, _, _, _ = evaluate(rec)
+    expect("7.2 passes when explicitly unexplained", "7.2" in r.failed, False)
+
+    print("  — a difference INSIDE delta is not excused from explanation")
+    rec = load("B1")
+    chk = rec["reconciliation"]["checks"][0]
+    del chk["cause"]
+    chk["expected_t"], chk["observed_t"] = 100.0, 100.5   # e_rel = +0,005, muito dentro de delta
+    r, _, _, _, _ = evaluate(rec)
+    expect("7.1 passes (within tolerance)", "7.1" in r.failed, False)
+    expect("7.2 still fails (no cause)", "7.2" in r.failed, True)
+
+
 def test_imported_factor():
     print("\nGuard — an imported carbon factor must fail clause 9.1b")
     rec = load("P2")
@@ -82,6 +108,7 @@ if __name__ == "__main__":
     test_p2()
     test_b1()
     test_delta_guard()
+    test_unexplained_difference_guard()
     test_imported_factor()
     print()
     if FAILS:

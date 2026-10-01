@@ -42,10 +42,10 @@ clause 8.1.
 | Quantity | Value | Basis |
 |----------|-------|-------|
 | Declared LDT | 962.38 t | Tribunal Marítimo registration (evidence tier A) |
-| Ferrous steel weighed | 681.765 t | Homologated weighbridge, 123 expeditions |
-| **`r` = ferrous / LDT** | **0.708** | — |
+| Ferrous steel weighed | 724.695 t | Homologated weighbridge, 123 expeditions |
+| **`r` = ferrous / LDT** | **0.753** | — |
 
-`r = 0.708` is the first published number quantifying how far a declared LDT sits from recovered
+`r = 0.753` is the first published number quantifying how far a declared LDT sits from recovered
 ferrous mass. It is not an error ratio and SHALL NOT be compared with P2's `k = 1.167`. It is
 evidence for clause 2: an estimate built on LDT is estimating a different quantity from the one
 that leaves the site on a truck.
@@ -56,10 +56,12 @@ The campaign record carries an internal inconsistency, already flagged in the pu
 audit notes before this protocol existed:
 
 ```
-Declared steel mass       681,765 kg
-Sum of line items         724,695 kg
+Declared steel mass       681,765 kg   (source document)
+Sum of line items         724,695 kg   (authoritative)
 Relative difference          +6.30 %
 Against δ = 0.15          within tolerance — record, do not escalate
+Cause (req. 7.2)          range error: TOTAL summed B1:B118, records run to row 125;
+                          the seven omitted expeditions are exactly 42,930 kg
 ```
 
 This is the reconciliation rule of clause 7 exercised on a campaign it was not designed against,
@@ -73,22 +75,28 @@ difference of 0.04 %.
 
 | Stream | Mass | Class |
 |--------|------|-------|
-| Ferrous steel | 682 t | weighed, 123 expeditions |
-| Equipment | 50 t | round figure |
-| Wire / copper | 10 t | round figure |
-| Electric motors | 5 t | round figure |
-| Bronze | 5 t | round figure |
-| Valves | 10 t | round figure |
-| Wood (donated) | 120 t | round figure |
-| Waste / residue | 80 t | round figure |
+| Ferrous steel | 724.695 t | weighed, 123 expeditions |
+| Equipment | 42.444 t | residual against LDT |
+| Wire / copper | 8.489 t | residual against LDT |
+| Electric motors | 4.244 t | residual against LDT |
+| Bronze | 4.244 t | residual against LDT |
+| Valves | 8.489 t | residual against LDT |
+| Wood (donated) | 101.865 t | residual against LDT |
+| Waste / residue | 67.910 t | residual against LDT |
 
-One stream is weighed. The other seven are round figures totalling exactly 280 t, which is
-exactly the declared LDT less the weighed ferrous mass, to within 0.4 t. That pattern is
+*Revised in v0.4.* The seven unmeasured streams were previously filed as round figures totalling
+280 t. They are a residual against declared LDT, so correcting the ferrous mass rescales all seven
+by the same factor: the residual falls from 280 t to 237.685 t. The rule that built them did not
+change — only its input did. They were round because they were *sized*, and the revision keeps that
+visible: the class column now names what they are instead of describing their typography.
+
+One stream is weighed. The other seven total exactly 237.685 t, which is exactly the declared LDT
+less the weighed ferrous mass. That pattern is
 consistent with those seven streams having been **sized to close against LDT** rather than
 weighed independently.
 
-Under clause 3 they are therefore `E3`, and under clause 2 the campaign total of 962 t SHALL NOT
-be presented as a measured mass. Only the 681.765 t of ferrous carries per-load weighing.
+Under clause 3 they are therefore `E3`, and under clause 2 the campaign total of 962.38 t SHALL NOT
+be presented as a measured mass. Only the 724.695 t of ferrous carries per-load weighing.
 
 This is recorded here rather than corrected, because the publisher does not yet have the tickets
 to correct it with. It is the clearest available illustration of why the protocol was written.

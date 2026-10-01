@@ -1,5 +1,5 @@
 {
-  "protocol_version": "0.3",
+  "protocol_version": "0.4",
   "campaign": {
     "id": "P2",
     "label": "Ship-to-shore gantry crane, port terminal",
@@ -14,7 +14,11 @@
       "measurement": "per_load",
       "loads": 107,
       "weighbridge_certified": true,
-      "evidence": { "E1": 458.7, "E2": 349.3, "E3": 0.0 }
+      "evidence": {
+        "E1": 458.7,
+        "E2": 349.3,
+        "E3": 0.0
+      }
     }
   ],
   "takeoff": {
@@ -48,5 +52,7 @@
     "single_source_of_truth": true,
     "inconsistency_blocks_certification": true
   },
-  "attestation": { "independent_third_party": false }
+  "attestation": {
+    "independent_third_party": false
+  }
 }

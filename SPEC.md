@@ -1,6 +1,6 @@
 # MRV-P Protocol
 
-**Version 0.3 — draft for comment**
+**Version 0.4 — draft for comment**
 An open protocol for auditable measurement of steel recovered in ship and port dismantling.
 
 Published by GSR Logística Reversa Naval. Free to implement, by anyone, including competitors.
@@ -169,6 +169,22 @@ e = | P_official − ŷ |          e / P_official > δ  ⇒  divergence         
 > it to conformance review, and SHALL NOT resolve it by revising the estimate to match the
 > weight. The divergence SHALL remain visible in the published campaign record after resolution.
 
+> **Requirement 7.2.** Every reconciliation check SHALL carry the cause of its difference, or SHALL
+> be marked explicitly as unexplained. A difference within `δ` is **not** thereby excused from
+> explanation: `δ` bounds when a divergence is *raised*, not when a difference may go
+> *uninvestigated*. A check carrying neither a cause nor an explicit unexplained marker is
+> non-conforming.
+
+Requirement 7.2 was added in v0.4 because the publisher's own B1 declaration passed clause 7 on a
+difference of +6.30% — comfortably inside `δ` — that turned out to be a range error in the source
+spreadsheet, with an exact and discoverable cause: a TOTAL cell summing to row 118 while the load
+records ran to row 125, omitting seven expeditions worth 42,930 kg. The traceability matrix had
+recorded it for months as a "physical ε of +6.3%" and no clause obliged anyone to ask why.
+
+A tolerance that excuses investigation converts a bug into a conformance. `δ` exists to decide when
+a difference becomes a *divergence requiring review*; it was never meant to decide when a difference
+deserves an *explanation*. Those are different questions, and v0.3 answered only the first.
+
 `δ = 0.15` is a chosen tolerance, not a derived one. It is stated here so that implementers use
 the same threshold and so that anyone may argue it is wrong. An implementer MAY apply a tighter
 δ; one applying a looser δ SHALL declare it, and the result SHALL NOT be described as conforming.
@@ -212,7 +228,7 @@ outfitting and non-ferrous mass that was never in scope.
 | Campaign | Ratio | Value | Denominator basis |
 |----------|-------|-------|-------------------|
 | `P2` | `k` | **1.167** | Sealed structural take-off, 692.64 t |
-| `B1` | `r` | **0.708** | Declared LDT, 962.38 t (ferrous recovered 681.765 t) |
+| `B1` | `r` | **0.753** | Declared LDT, 962.38 t (ferrous recovered 724.695 t) |
 
 These two numbers SHALL NOT be compared with each other. They are published together to make the
 distinction concrete. See [reference/b1-campaign.md](reference/b1-campaign.md) for why B1 cannot
@@ -298,7 +314,7 @@ Read this before citing the protocol.
   against a second campaign (B1, two passenger ferries) did not settle it: that campaign has no
   structural take-off, only a declared LDT, and so yields `r`, not `k`. A second `k` remains the
   single highest-value open contribution — see [CONTRIBUTING.md](CONTRIBUTING.md).
-- `r = 0.708` likewise rests on one campaign of one asset type.
+- `r = 0.753` likewise rests on one campaign of one asset type.
 - No conformity assessment scheme exists. Nobody can currently certify a Level 3 claim,
   including the publisher.
 - The protocol has not been tested against an asset containing significant composite fractions.
@@ -319,7 +335,7 @@ Two campaigns are published as references.
 weighed loads against a 692.64 t structural take-off, under a cut plan sealed by a registered
 engineer. See [reference/p2-campaign.md](reference/p2-campaign.md).
 
-**B1** — two historic passenger ferries, 2020: 681.765 t of ferrous steel weighed across 123
+**B1** — two historic passenger ferries, 2020: 724.695 t of ferrous steel weighed across 123
 expeditions against a declared LDT of 962.38 t. Added in v0.2 to test clause 8, which it did not
 confirm; it produced clause 8.1 instead. See [reference/b1-campaign.md](reference/b1-campaign.md).
 

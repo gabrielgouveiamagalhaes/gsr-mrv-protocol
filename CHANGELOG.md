@@ -2,6 +2,45 @@
 
 All notable changes to the MRV-P Protocol are recorded here, with the rationale for each.
 
+## [0.4] — 2026-10-01
+
+A tolerance that excuses investigation converts a bug into a conformance. The publisher's own
+declaration proved it.
+
+### Added
+- **Requirement 7.2:** every reconciliation check SHALL carry the cause of its difference, or SHALL
+  be marked explicitly as unexplained. A difference within `δ` is **not** excused from explanation.
+  Enforced by the reference checker; guarded by `test_unexplained_difference_guard`.
+
+### Changed
+- **B1 reference data corrected.** The ferrous stream moves from 681.765 t to **724.695 t**, and the
+  seven residual streams from a round 280 t to **237.685 t**. The ratio moves from `r = 0.708` to
+  **`r = 0.753`**. `schema/examples/B1.json` and `conformance/declarations/B1.md` both updated.
+
+### Why
+For three filings, B1's steel reconciliation showed +6.30% — comfortably inside `δ = 0.15` — and
+clause 7 passed it. Correctly, under v0.3: `δ` is the threshold at which a difference becomes a
+divergence requiring review, and 6.3% was below it.
+
+The cause turned out to be arithmetic and exact. The source spreadsheet's TOTAL cell summed
+`B1:B118` while the load records ran to row 125; the seven omitted expeditions (2020-09-30 to
+2020-10-08) are exactly 42,930 kg. The traceability matrix had carried it for months as a "physical ε
+of +6.3%" — a label, not an explanation — and no clause obliged anyone to ask why.
+
+So the specification was answering only half the question. `δ` decides when a difference becomes a
+*divergence requiring review*. It was never meant to decide whether a difference deserves an
+*explanation*. v0.4 separates the two.
+
+The correction propagates in the direction that costs the publisher something: with the ferrous mass
+right, the seven residual streams close against declared LDT **exactly** (962.38 − 724.695 =
+237.685) instead of approximately, so the campaign's non-conformance under clause 2.1 is now more
+evident than it was. That is the correct direction for a correction to move.
+
+### Known limit this exposes
+Requirement 7.2 obliges an explanation or an explicit admission of its absence. It does not and
+cannot adjudicate whether a stated cause is *true*. A false cause passes 7.2 and is a matter for
+audit, not for a checker.
+
 ## [0.3] — 2026-09-01
 
 Filing the publisher's own conformance declarations changed the specification. Again.

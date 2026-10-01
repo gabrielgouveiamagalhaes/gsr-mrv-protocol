@@ -1,6 +1,6 @@
 # Protocolo MRV-P
 
-**Versão 0.3 — minuta para comentários**
+**Versão 0.4 — minuta para comentários**
 Protocolo aberto para mensuração auditável de aço recuperado em desmantelamento naval-portuário.
 
 Publicado pela GSR Logística Reversa Naval. Livre para implementação por qualquer parte,
@@ -175,6 +175,23 @@ e = | P_oficial − ŷ |          e / P_oficial > δ  ⇒  divergência         
 > pesagem. A divergência DEVE permanecer visível no registro publicado da campanha após a
 > resolução.
 
+> **Requisito 7.2.** Toda verificação de reconciliação DEVE carregar a causa da sua diferença, ou
+> DEVE ser marcada explicitamente como não explicada. Diferença dentro de `δ` **não** fica por isso
+> dispensada de explicação: `δ` delimita quando uma divergência é *levantada*, não quando uma
+> diferença pode ficar *sem investigação*. Verificação que não traga causa nem marcador explícito de
+> não explicada é não conforme.
+
+O requisito 7.2 entrou na v0.4 porque a declaração B1 do próprio publicador passou pela cláusula 7
+sobre uma diferença de +6,30% — folgadamente dentro de `δ` — que era erro de intervalo na planilha de
+origem, com causa exata e descobrível: a célula TOTAL somava até a linha 118 enquanto os registros de
+carga iam até a 125, omitindo sete expedições que valem 42.930 kg. A matriz de rastreabilidade a
+registrava havia meses como "ε físico de +6,3%", e nenhuma cláusula obrigava ninguém a perguntar por
+quê.
+
+Tolerância que dispensa investigação converte bug em conformidade. `δ` existe para decidir quando uma
+diferença se torna *divergência sujeita a revisão*; nunca foi para decidir quando uma diferença
+merece *explicação*. São perguntas diferentes, e a v0.3 respondia só a primeira.
+
 `δ = 0,15` é tolerância escolhida, não derivada. Está declarada aqui para que implementadores usem
 o mesmo limiar e para que qualquer um possa argumentar que ele está errado. O implementador PODE
 aplicar δ mais estrito; quem aplicar δ mais frouxo DEVE declará-lo, e o resultado NÃO DEVE ser
@@ -219,7 +236,7 @@ nunca estiveram no escopo.
 | Campanha | Razão | Valor | Base do denominador |
 |----------|-------|-------|---------------------|
 | `P2` | `k` | **1,167** | Levantamento estrutural selado, 692,64 t |
-| `B1` | `r` | **0,708** | LDT declarada, 962,38 t (ferroso recuperado 681,765 t) |
+| `B1` | `r` | **0,753** | LDT declarada, 962,38 t (ferroso recuperado 724,695 t) |
 
 Estes dois números NÃO DEVEM ser comparados entre si. São publicados juntos para tornar a
 distinção concreta.
@@ -302,7 +319,7 @@ Leia isto antes de citar o protocolo.
 - O fator de calibração `k = 1,167` continua vindo de **um ativo de um tipo**. Uma segunda campanha
   foi testada contra ele e não o resolveu: aquela campanha não tem levantamento estrutural, apenas
   LDT declarada, e portanto produz `r`, não `k`.
-- `r = 0,708` igualmente repousa sobre uma campanha de um tipo de ativo.
+- `r = 0,753` igualmente repousa sobre uma campanha de um tipo de ativo.
 - Não existe esquema de avaliação da conformidade. Ninguém pode hoje certificar alegação de Nível
   3, inclusive o publicador.
 - O protocolo não foi testado contra ativo com frações compósitas significativas.
@@ -319,7 +336,7 @@ Duas campanhas são publicadas como referência.
 pesadas contra levantamento estrutural de 692,64 t, sob plano de corte selado por engenheiro
 registrado. Ver [reference/p2-campaign.md](reference/p2-campaign.md).
 
-**B1** — duas barcas históricas de passageiros, 2020: 681,765 t de aço ferroso pesadas em 123
+**B1** — duas barcas históricas de passageiros, 2020: 724,695 t de aço ferroso pesadas em 123
 expedições contra LDT declarada de 962,38 t. Incluída na v0.2 para testar a cláusula 8, o que não
 confirmou; produziu a cláusula 8.1 em seu lugar. Ver
 [reference/b1-campaign.md](reference/b1-campaign.md).

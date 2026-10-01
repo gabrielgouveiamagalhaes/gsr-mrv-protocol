@@ -1,5 +1,5 @@
 {
-  "protocol_version": "0.3",
+  "protocol_version": "0.4",
   "campaign": {
     "id": "B1",
     "label": "Vital Brazil & Itapuca, passenger ferries",
@@ -10,19 +10,79 @@
   "streams": [
     {
       "material": "steel_ferrous",
-      "mass_t": 681.765,
+      "mass_t": 724.695,
       "measurement": "per_load",
       "loads": 123,
       "weighbridge_certified": true,
-      "evidence": { "E1": 0.0, "E2": 681.765, "E3": 0.0 }
+      "evidence": {
+        "E1": 0.0,
+        "E2": 724.695,
+        "E3": 0.0
+      }
     },
-    { "material": "equipment",        "mass_t": 50.0,  "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 50.0 } },
-    { "material": "wire_copper",      "mass_t": 10.0,  "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 10.0 } },
-    { "material": "electric_motors",  "mass_t": 5.0,   "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 5.0 } },
-    { "material": "bronze",           "mass_t": 5.0,   "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 5.0 } },
-    { "material": "valves",           "mass_t": 10.0,  "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 10.0 } },
-    { "material": "wood",             "mass_t": 120.0, "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 120.0 } },
-    { "material": "residue",          "mass_t": 80.0,  "measurement": "estimated", "weighbridge_certified": false, "evidence": { "E3": 80.0 } }
+    {
+      "material": "equipment",
+      "mass_t": 42.444,
+      "measurement": "estimated",
+      "weighbridge_certified": false,
+      "evidence": {
+        "E3": 42.444
+      }
+    },
+    {
+      "material": "wire_copper",
+      "mass_t": 8.489,
+      "measurement": "estimated",
+      "weighbridge_certified": false,
+      "evidence": {
+        "E3": 8.489
+      }
+    },
+    {
+      "material": "electric_motors",
+      "mass_t": 4.244,
+      "measurement": "estimated",
+      "weighbridge_certified": false,
+      "evidence": {
+        "E3": 4.244
+      }
+    },
+    {
+      "material": "bronze",
+      "mass_t": 4.244,
+      "measurement": "estimated",
+      "weighbridge_certified": false,
+      "evidence": {
+        "E3": 4.244
+      }
+    },
+    {
+      "material": "valves",
+      "mass_t": 8.489,
+      "measurement": "estimated",
+      "weighbridge_certified": false,
+      "evidence": {
+        "E3": 8.489
+      }
+    },
+    {
+      "material": "wood",
+      "mass_t": 101.865,
+      "measurement": "estimated",
+      "weighbridge_certified": false,
+      "evidence": {
+        "E3": 101.865
+      }
+    },
+    {
+      "material": "residue",
+      "mass_t": 67.91,
+      "measurement": "estimated",
+      "weighbridge_certified": false,
+      "evidence": {
+        "E3": 67.91
+      }
+    }
   ],
   "declared": {
     "basis": "ldt",
@@ -32,7 +92,12 @@
   "reconciliation": {
     "delta": 0.15,
     "checks": [
-      { "label": "steel declared vs sum of line items", "expected_t": 681.765, "observed_t": 724.695 }
+      {
+        "label": "steel declared vs sum of line items",
+        "expected_t": 681.765,
+        "observed_t": 724.695,
+        "cause": "Range error in the source spreadsheet: the TOTAL cell summed B1:B118 while load records run to row 125. The seven omitted expeditions (2020-09-30 to 2020-10-08) are exactly 42,930 kg. The sum of the 123 expeditions, 724,695 kg, is authoritative; 681,765 kg is the figure the source document declared and is retained here under requirement 7.1."
+      }
     ]
   },
   "scoring": {
@@ -57,5 +122,7 @@
     "single_source_of_truth": true,
     "inconsistency_blocks_certification": false
   },
-  "attestation": { "independent_third_party": false }
+  "attestation": {
+    "independent_third_party": false
+  }
 }
